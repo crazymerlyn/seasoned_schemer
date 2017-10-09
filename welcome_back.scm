@@ -7,3 +7,11 @@
   (cond ((null? lat) #f)
         ((eq? preceding (car lat)) #t)
         (else (two-in-a-row-b? (car lat) (cdr lat)))))
+
+(define (sum-of-prefixes-b sum tup)
+  (cond ((null? tup) '())
+        (else (cons (+ sum (car tup))
+                    (sum-of-prefixes-b (+ sum (car tup))
+                                       (cdr tup))))))
+
+(define (sum-of-prefixes tup) (sum-of-prefixes-b 0 tup))
