@@ -68,3 +68,12 @@
                       ((eq? a (car lat)) '())
                       (else (cons (car lat) (R (cdr lat))))))))
     (R lat)))
+
+(define (rember-upto-last a lat)
+  (call-with-current-continuation
+    (lambda (skip)
+      (letrec ((R (lambda (lat)
+                    (cond ((null? lat) '())
+                          ((eq? a (car lat)) (skip (R (cdr lat))))
+                          (else (cons (car lat) (R (cdr lat))))))))
+        (R lat)))))
