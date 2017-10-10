@@ -43,3 +43,10 @@
                             (else (or (eq? (car lat) a)
                                       (member? a (cdr lat))))))))
     (union1 s1)))
+
+(define (intersect s1 s2)
+  (letrec ((intersect1 (lambda (s1)
+                     (cond ((null? s1) '())
+                           ((member? (car s1) s2) (cons (car s1) (intersect1 (cdr s1))))
+                           (else (intersect1 (cdr s1)))))))
+    (intersect1 s1)))
