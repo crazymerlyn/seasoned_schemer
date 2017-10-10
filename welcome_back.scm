@@ -82,6 +82,8 @@
 (define (leftmost l)
   (cond ((null? l) '())
         ((atom? (car l)) (car l))
-        (else (if (atom? (leftmost (car l)))
-                  (leftmost (car l))
-                  (leftmost (cdr l))))))
+        (else
+          (let ((first (leftmost (car l))))
+           (if (atom? first)
+               first
+               (leftmost (cdr l)))))))
