@@ -25,3 +25,10 @@
                 (scramble-b (cdr tup) (cons (car tup) rev-pre))))))
 
 (define (scramble tup) (scramble-b tup '()))
+
+(define (member? a lat)
+  (letrec ((yes? (lambda (lat)
+                   (cond ((null? lat) #f)
+                         (else (or (eq? a (car lat))
+                                   (yes? (cdr lat))))))))
+    (yes? lat)))
