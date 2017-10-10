@@ -61,3 +61,10 @@
                                            (A (cdr lset))))))))
         (cond ((null? lset) '())
               (else (A lset)))))))
+
+(define (rember-beyond-first a lat)
+  (letrec ((R (lambda (lat)
+                (cond ((null? lat) '())
+                      ((eq? a (car lat)) '())
+                      (else (cons (car lat) (R (cdr lat))))))))
+    (R lat)))
