@@ -1,3 +1,4 @@
+(load "numbers.scm")
 (define (two-in-a-row? lat)
   (cond ((null? lat) #f)
         (else
@@ -15,3 +16,12 @@
                                        (cdr tup))))))
 
 (define (sum-of-prefixes tup) (sum-of-prefixes-b 0 tup))
+
+(define (scramble-b tup rev-pre)
+  (cond ((null? tup) '())
+        (else
+          (cons (pick (car tup)
+                      (cons (car tup) rev-pre))
+                (scramble-b (cdr tup) (cons (car tup) rev-pre))))))
+
+(define (scramble tup) (scramble-b tup '()))
