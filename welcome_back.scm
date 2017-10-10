@@ -1,4 +1,5 @@
 (load "numbers.scm")
+(load "base.scm")
 (define (two-in-a-row? lat)
   (cond ((null? lat) #f)
         (else
@@ -77,3 +78,10 @@
                           ((eq? a (car lat)) (skip (R (cdr lat))))
                           (else (cons (car lat) (R (cdr lat))))))))
         (R lat)))))
+
+(define (leftmost l)
+  (cond ((null? l) '())
+        ((atom? (car l)) (car l))
+        (else (if (atom? (leftmost (car l)))
+                  (leftmost (car l))
+                  (leftmost (cdr l))))))
