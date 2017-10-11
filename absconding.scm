@@ -12,3 +12,23 @@
     (lambda (here)
       (set! leave here)
       (walk l))))
+
+(define (waddle l)
+  (cond ((null? l) '())
+        ((atom? (car l))
+         (let ()
+           (call-with-current-continuation
+             (lambda (rest)
+               (set! fill rest)
+               (leave (car l))))
+           (waddle (cdr l))))
+        (else
+          (let ()
+           (waddle (car l))
+           (waddle (cdr l))))))
+
+(define (start-it2 l)
+  (call-with-current-continuation
+    (lambda (here)
+      (set! leave here)
+      (waddle l))))
