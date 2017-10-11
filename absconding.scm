@@ -1,5 +1,6 @@
 (load "base.scm")
-(define leave)
+(define leave 0)
+(define fill 0)
 (define (walk l)
   (cond ((null? l) '())
         ((atom? (car l)) (leave (car l)))
@@ -32,3 +33,17 @@
     (lambda (here)
       (set! leave here)
       (waddle l))))
+
+(define (get-next)
+  (call-with-current-continuation
+    (lambda (here-again)
+      (let ()
+       (set! leave here-again)
+       (fill 'go)))))
+
+(define (get-first l)
+  (call-with-current-continuation
+    (lambda (here)
+      (set! leave here)
+      (waddle l)
+      (leave '()))))
